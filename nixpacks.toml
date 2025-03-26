@@ -1,2 +1,2 @@
 [phases.setup]
-nixPkgs = ["cmake", "gcc", "gfortran", "libopenblas", "liblapack"]
+nixPkgs = ["cmake", "gcc", "gfortran", "openblas", "lapack"]
