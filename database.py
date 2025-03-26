@@ -4,17 +4,15 @@ import numpy as np
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-def get_db_connection():
-    return psycopg2.connect(DATABASE_URL)
-
-def get_user_face_encoding(user_id):
-    """Fetches the stored face encoding from the database."""
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT face_encoding FROM users WHERE id = %s;", (user_id,))
-    row = cursor.fetchone()
+def get_user_face_encoding():
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+    cur.execute("SELECT id, face_encoding FROM users LIMIT 1")
+    row = cur.fetchone()
     conn.close()
-    
+
     if row:
-        return np.array(eval(row[0]))  # Convert string to numpy array
-    return None
+        user_id, encoding_str = row
+        encoding_array = np.fromstring(encoding_str[1:-1], sep=',')
+        return user_id, encoding_array
+    return None, None
