@@ -1,1 +1,0 @@
-web: gunicorn -w 4 --bind 0.0.0.0:5001 app:app
