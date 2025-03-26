@@ -6,4 +6,3 @@ face_recognition==1.3.0
 psycopg2==2.9.10
 numpy
 gunicorn==23.0.0
-python-dotenv
